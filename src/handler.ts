@@ -1,9 +1,0 @@
-export async function handleRequest(request: Request): Promise<Response> {
-  return new Response(
-    `request method: ${request.method}\nrequest: ${JSON.stringify(
-      request,
-      null,
-      2
-    )}`
-  );
-}
