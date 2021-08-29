@@ -12,6 +12,6 @@
   "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.12.24",
-    "gleam_stdlib": "file:./_build/lib/gleam_stdlib"
+    "gleam-packages": "file:./_build/lib"
   }
 }
