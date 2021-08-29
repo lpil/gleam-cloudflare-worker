@@ -22,7 +22,6 @@ clone_dep() {
 
 compile_library() {
   local name="$1"
-  echo "Compiling $name"
 
   shift
   local lib_flags=()
@@ -36,6 +35,7 @@ compile_library() {
 
 
   if [ ! -d "$out" ] ; then
+    echo "Compiling $name"
     gleam compile-package \
       --name "$name" \
       --target javascript \
@@ -49,14 +49,18 @@ compile_library() {
 clone_dep gleam_stdlib main https://github.com/gleam-lang/stdlib.git
 compile_library gleam_stdlib
 
+clone_dep gleam_javascript main https://github.com/gleam-lang/javascript.git
+compile_library gleam_javascript gleam_stdlib
+
 rm -rf $(project_dir gleam_cloudflare_worker)
 gleam compile-package \
-  --name gleam_javascript \
+  --name gleam_cloudflare_worker \
   --target javascript \
   --src src \
   --test test \
   --out $(project_dir gleam_cloudflare_worker) \
-  --lib $(project_dir gleam_stdlib)
+  --lib $(project_dir gleam_stdlib) \
+  --lib $(project_dir gleam_javascript)
 cp "src/"*.js $(project_dir gleam_cloudflare_worker)/
 
 ./node_modules/.bin/esbuild $(project_dir gleam_cloudflare_worker)/index.js --bundle --outfile=_build/dist/index.js

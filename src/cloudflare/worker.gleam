@@ -1,3 +1,5 @@
+import gleam/javascript/promise.{Promise}
+
 // request: {
 //   "cf": {
 //     "clientTcpRtt": 0,
@@ -56,7 +58,9 @@ pub external type Request
 
 pub external type Response
 
-pub external fn add_fetch_event_listener(fn(Request) -> Response) -> Nil =
+pub external fn add_fetch_event_listener(
+  fn(Request) -> Promise(Response),
+) -> Nil =
   "../ffi.js" "add_fetch_event_listener"
 
 pub external fn response(
