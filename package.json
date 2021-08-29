@@ -11,8 +11,7 @@
   "author": "Louis Pilfold <louis@lpil.uk>",
   "license": "MIT",
   "devDependencies": {
-    "gleam_stdlib": "file:./_build/lib/gleam_stdlib",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.0"
+    "esbuild": "^0.12.24",
+    "gleam_stdlib": "file:./_build/lib/gleam_stdlib"
   }
 }

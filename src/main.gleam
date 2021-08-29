@@ -9,7 +9,7 @@ fn handle_fetch(request: Request) -> Response {
   let body =
     string.concat([
       "Hello from Gleam on Cloudflare Workers ✨\n\n",
-      "I hope you're having a great time there in ",
+      "I hope you're having a great time over there in ",
       worker.city(request),
       "!",
     ])

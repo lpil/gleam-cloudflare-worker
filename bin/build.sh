@@ -59,4 +59,4 @@ gleam compile-package \
   --lib $(project_dir gleam_stdlib)
 cp "src/"*.js $(project_dir gleam_cloudflare_worker)/
 
-./node_modules/.bin/webpack
+./node_modules/.bin/esbuild $(project_dir gleam_cloudflare_worker)/index.js --bundle --outfile=_build/dist/index.js
