@@ -5,9 +5,8 @@ export function add_fetch_event_listener(handleRequest) {
 }
 
 export function response(status, headersList, body) {
-  let headers = headersList
-    .toArray()
-    .reduce((h, [k, v]) => h.append(k, v), new Headers());
+  let headers = new Headers();
+  for (let [k, v] of headersList) headers.append(k, v);
   return new Response(body, {
     status,
     headers,

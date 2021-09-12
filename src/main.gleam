@@ -14,6 +14,6 @@ fn handle_fetch(request: Request) -> Promise(Response) {
       worker.city(request),
       "!",
     ])
-  worker.response(200, [], body)
+  worker.response(200, [#("x-powered-by", "Gleam")], body)
   |> promise.resolve
 }
