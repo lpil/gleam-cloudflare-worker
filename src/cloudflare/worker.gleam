@@ -81,3 +81,12 @@ pub external fn body(Request) -> String =
 
 pub external fn city(Request) -> String =
   "../ffi.js" "city"
+
+pub external fn country(Request) -> String =
+  "../ffi.js" "country"
+
+pub external fn latitude(Request) -> String =
+  "../ffi.js" "latitude"
+
+pub external fn longitude(Request) -> String =
+  "../ffi.js" "longitude"
