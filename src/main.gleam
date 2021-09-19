@@ -22,7 +22,7 @@ fn make_body(city: String, temp: Result(Float, Nil)) -> String {
   let message = case temp {
     Ok(temp) -> {
       let temp = float.to_string(temp)
-      string.concat(["It's ", temp, " degrees celcius in ", city, " right now."])
+      string.concat(["It's ", temp, " degrees celsius in ", city, " right now."])
     }
     Error(Nil) -> string.concat(["I think you're currently in ", city, "."])
   }
