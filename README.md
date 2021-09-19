@@ -2,7 +2,7 @@
 
 A batteries included template for kick starting a Gleam Cloudflare worker project.
 
-### Note: You must use [wrangler][install-wrangler] 1.17 or newer to use this template.
+Note: You must use [wrangler][install-wrangler] 1.19 or newer to use this template.
 
 [install-wrangler]: https://developers.cloudflare.com/workers/cli-wrangler/install-update
 

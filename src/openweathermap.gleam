@@ -1,3 +1,6 @@
+//// Getting the temperature of a given location using
+//// https://openweathermap.org/. Thanks openweathermap!
+
 import gleam/javascript/promise.{Promise}
 import gleam/dynamic.{DecodeError, Dynamic}
 import gleam/http.{Get}
@@ -5,16 +8,17 @@ import gleam/result
 import gleam/fetch
 
 pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Float, Nil)) {
-  http.default_req()
-  |> http.set_method(Get)
-  |> http.set_host("api.openweathermap.org")
-  |> http.set_path("/data/2.5/weather")
-  |> http.set_query([
+  let query = [
     #("lat", lat),
     #("lon", lon),
     #("units", "metric"),
     #("appid", api_key()),
-  ])
+  ]
+  http.default_req()
+  |> http.set_method(Get)
+  |> http.set_host("api.openweathermap.org")
+  |> http.set_path("/data/2.5/weather")
+  |> http.set_query(query)
   |> fetch.send
   |> promise.then_try(fetch.read_json_body)
   |> promise.map(result.nil_error)
