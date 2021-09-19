@@ -4,7 +4,7 @@ import gleam/http.{Get}
 import gleam/result
 import gleam/fetch
 
-pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Int, Nil)) {
+pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Float, Nil)) {
   http.default_req()
   |> http.set_method(Get)
   |> http.set_host("api.openweathermap.org")
@@ -26,10 +26,10 @@ pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Int, Nil)) {
   })
 }
 
-fn decode_temperature(json: Dynamic) -> Result(Int, DecodeError) {
+fn decode_temperature(json: Dynamic) -> Result(Float, DecodeError) {
   try main = dynamic.field(json, "main")
   try temp = dynamic.field(main, "temp")
-  dynamic.int(temp)
+  dynamic.float(temp)
 }
 
 external fn api_key() -> String =
