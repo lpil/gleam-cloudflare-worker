@@ -29,6 +29,24 @@
       "dependencies": [
         "gleam_stdlib"
       ]
+    },
+    {
+      "name": "gleam_http",
+      "ref": "main",
+      "url": "https://github.com/gleam-lang/http.git",
+      "dependencies": [
+        "gleam_stdlib"
+      ]
+    },
+    {
+      "name": "gleam_fetch",
+      "ref": "main",
+      "url": "https://github.com/gleam-lang/http.git",
+      "dependencies": [
+        "gleam_stdlib",
+        "gleam_http",
+        "gleam_javascript"
+      ]
     }
   ]
 }
