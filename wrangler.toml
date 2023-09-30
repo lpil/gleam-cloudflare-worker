@@ -1,7 +1,6 @@
 name = "gleam-cloudflare-worker"
-main = "build/dist/index.js"
-workers_dev = true
-compatibility_date = "2021-09-19"
+main = "build/dev/javascript/worker/index.js"
+compatibility_date = "2023-09-22"
 
 [build]
-command = "npm run build"
+command = "gleam build"

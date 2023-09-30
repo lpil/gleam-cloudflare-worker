@@ -6,11 +6,10 @@
   "author": "Louis Pilfold <louis@lpil.uk>",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "gleam build && esbuild --bundle build/dev/javascript/worker/index.js --outfile=build/dist/index.js",
-    "dev": "wrangler dev"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "esbuild": "^0.12.24",
     "wrangler": "^3.10.1"
   }
 }

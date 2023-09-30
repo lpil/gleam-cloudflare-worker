@@ -1,13 +1,13 @@
-import gleam/javascript/promise.{Promise}
-
 pub type Request
 
 pub type Response
 
-@external(javascript, "../ffi.js", "add_fetch_event_listener")
-pub fn add_fetch_event_listener(
-  listener: fn(Request) -> Promise(Response),
-) -> Nil
+pub type Environment
+
+@external(javascript, "../ffi.js", "read_environment")
+pub fn read_environment(env: Environment, name: String) -> Result(String, Nil)
+
+pub type ExecutionContext
 
 @external(javascript, "../ffi.js", "response")
 pub fn response(

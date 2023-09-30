@@ -8,12 +8,16 @@ import gleam/http/request
 import gleam/result
 import gleam/fetch
 
-pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Float, Nil)) {
+pub fn get_temperature(
+  lat: String,
+  lon: String,
+  api_key: String,
+) -> Promise(Result(Float, Nil)) {
   let query = [
     #("lat", lat),
     #("lon", lon),
     #("units", "metric"),
-    #("appid", api_key()),
+    #("appid", api_key),
   ]
   let assert Ok(req) =
     request.to("https://api.openweathermap.org/data/2.5/weather")
@@ -38,6 +42,3 @@ pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Float, Nil)) 
 fn decode_temperature(json: Dynamic) -> Result(Float, List(DecodeError)) {
   dynamic.field("main", dynamic.field("temp", dynamic.float))(json)
 }
-
-@external(javascript, "./ffi.js", "open_weather_map_api_key")
-fn api_key() -> String

@@ -1,8 +1,4 @@
-export function add_fetch_event_listener(handleRequest) {
-  addEventListener("fetch", (event) => {
-    event.respondWith(handleRequest(event.request));
-  });
-}
+import { Ok, Error as Err } from "./gleam.mjs";
 
 export function response(status, headersList, body) {
   let headers = new Headers();
@@ -42,5 +38,10 @@ export function longitude(request) {
 }
 
 export function open_weather_map_api_key() {
-  return OPEN_WEATHER_MAP_API_KEY; // Injected by CloudFlare Workers secrets
+  return; // Injected by CloudFlare Workers secrets
+}
+
+export function read_environment(env, key) {
+  const value = env[key];
+  return value ? new Ok(value) : new Err(undefined);
 }
