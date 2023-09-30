@@ -5,48 +5,12 @@
   "type": "module",
   "author": "Louis Pilfold <louis@lpil.uk>",
   "license": "Apache-2.0",
-  "main": "target/dist/index.js",
   "scripts": {
-    "build": "node bin/build.js build && sh bin/bundle.sh",
-    "test": "node bin/build.js test",
-    "format": "gleam format",
-    "uuid": "echo f0bdfd1a39324e26b30f8360a0ba00cd"
+    "build": "gleam build && esbuild --bundle build/dev/javascript/worker/index.js --outfile=build/dist/index.js",
+    "dev": "wrangler dev"
   },
   "devDependencies": {
     "esbuild": "^0.12.24",
-    "gleam-packages": "file:./target/lib"
-  },
-  "gleamDependencies": [
-    {
-      "name": "gleam_stdlib",
-      "ref": "main",
-      "url": "https://github.com/gleam-lang/stdlib.git"
-    },
-    {
-      "name": "gleam_javascript",
-      "ref": "main",
-      "url": "https://github.com/gleam-lang/javascript.git",
-      "dependencies": [
-        "gleam_stdlib"
-      ]
-    },
-    {
-      "name": "gleam_http",
-      "ref": "main",
-      "url": "https://github.com/gleam-lang/http.git",
-      "dependencies": [
-        "gleam_stdlib"
-      ]
-    },
-    {
-      "name": "gleam_fetch",
-      "ref": "main",
-      "url": "https://github.com/gleam-lang/fetch.git",
-      "dependencies": [
-        "gleam_stdlib",
-        "gleam_http",
-        "gleam_javascript"
-      ]
-    }
-  ]
+    "wrangler": "^3.10.1"
+  }
 }

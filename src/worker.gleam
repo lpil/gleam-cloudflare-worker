@@ -22,14 +22,13 @@ fn make_body(city: String, temp: Result(Float, Nil)) -> String {
   let message = case temp {
     Ok(temp) -> {
       let temp = float.to_string(temp)
-      string.concat(["It's ", temp, " degrees celsius in ", city, " right now."])
+      "It's " <> temp <> " degrees celsius in " <> city <> " right now."
     }
-    Error(Nil) -> string.concat(["I think you're currently in ", city, "."])
+    Error(Nil) -> "I think you're currently in " <> city <> "."
   }
-  let body =
-    string.concat([
-      "Hello from Gleam on Cloudflare Workers ✨\n\n",
-      message,
-      "\nI hope you're having a great time over there!",
-    ])
+  string.concat([
+    "Hello from Gleam on Cloudflare Workers ✨\n\n",
+    message,
+    "\nI hope you're having a great time over there!",
+  ])
 }

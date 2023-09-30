@@ -4,6 +4,7 @@
 import gleam/javascript/promise.{Promise}
 import gleam/dynamic.{DecodeError, Dynamic}
 import gleam/http.{Get}
+import gleam/http/request
 import gleam/result
 import gleam/fetch
 
@@ -14,27 +15,29 @@ pub fn get_temperature(lat: String, lon: String) -> Promise(Result(Float, Nil)) 
     #("units", "metric"),
     #("appid", api_key()),
   ]
-  http.default_req()
-  |> http.set_method(Get)
-  |> http.set_host("api.openweathermap.org")
-  |> http.set_path("/data/2.5/weather")
-  |> http.set_query(query)
-  |> fetch.send
-  |> promise.then_try(fetch.read_json_body)
-  |> promise.map(result.nil_error)
-  |> promise.then_try(fn(response: http.Response(Dynamic)) {
-    response.body
-    |> decode_temperature
-    |> result.nil_error
-    |> promise.resolve
-  })
+  let assert Ok(req) =
+    request.to("https://api.openweathermap.org/data/2.5/weather")
+
+  let req =
+    req
+    |> request.set_method(Get)
+    |> request.set_query(query)
+
+  use resp <- promise.try_await(
+    fetch.send(req)
+    |> promise.try_await(fetch.read_json_body)
+    |> promise.map(result.nil_error),
+  )
+
+  resp.body
+  |> decode_temperature
+  |> result.nil_error
+  |> promise.resolve
 }
 
-fn decode_temperature(json: Dynamic) -> Result(Float, DecodeError) {
-  try main = dynamic.field(json, "main")
-  try temp = dynamic.field(main, "temp")
-  dynamic.float(temp)
+fn decode_temperature(json: Dynamic) -> Result(Float, List(DecodeError)) {
+  dynamic.field("main", dynamic.field("temp", dynamic.float))(json)
 }
 
-external fn api_key() -> String =
-  "./ffi.js" "open_weather_api_key"
+@external(javascript, "./ffi.js", "open_weather_map_api_key")
+fn api_key() -> String

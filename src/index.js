@@ -1,2 +1,2 @@
-import { main } from "./main.js";
+import { main } from "./worker.mjs";
 main();

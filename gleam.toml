@@ -1,0 +1,20 @@
+name = "worker"
+version = "1.0.0"
+description = "A Cloudflare Worker in Gleam"
+target = "javascript"
+
+licences = ["Apache-2.0"]
+repository = { type = "github", user = "lpil", repo = "gleam-cloudflare-worker" }
+links = [
+  { title = "Website", href = "https://gleam.run" },
+  { title = "Sponsor", href = "https://github.com/sponsors/lpil" },
+]
+
+[dependencies]
+gleam_stdlib = "~> 0.31"
+gleam_javascript = "~> 0.6"
+gleam_fetch = "~> 0.2"
+gleam_http = "~> 3.5"
+
+[dev-dependencies]
+gleeunit = "~> 0.10"

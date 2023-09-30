@@ -1,3 +1,6 @@
-target
+*.beam
+*.ez
+.dev.vars
+build
+erl_crash.dump
 node_modules
-/.idea/

@@ -41,6 +41,6 @@ export function longitude(request) {
   return request.cf.longitude;
 }
 
-export function open_weather_api_key() {
-  return OPEN_WEATHER_API_KEY; // Injected by CloudFlare Workers secrets
+export function open_weather_map_api_key() {
+  return OPEN_WEATHER_MAP_API_KEY; // Injected by CloudFlare Workers secrets
 }

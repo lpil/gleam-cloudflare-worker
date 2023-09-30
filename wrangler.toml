@@ -1,13 +1,7 @@
 name = "gleam-cloudflare-worker"
-type = "javascript"
-zone_id = ""
-account_id = ""
-route = ""
+main = "build/dist/index.js"
 workers_dev = true
 compatibility_date = "2021-09-19"
 
 [build]
 command = "npm run build"
-
-[build.upload]
-format = "service-worker"

@@ -1,92 +1,38 @@
 import gleam/javascript/promise.{Promise}
 
-// request: {
-//   "cf": {
-//     "clientTcpRtt": 0,
-//     "longitude": "0",
-//     "httpProtocol": "HTTP/1.1",
-//     "tlsCipher": "ECDHE-ECDSA-AES128-GCM-SHA256",
-//     "continent": "EU",
-//     "asn": 9105,
-//     "clientAcceptEncoding": "gzip",
-//     "country": "GB",
-//     "tlsClientAuth": {
-//       "certIssuerDNLegacy": "",
-//       "certIssuerSKI": "",
-//       "certSubjectDNRFC2253": "",
-//       "certSubjectDNLegacy": "",
-//       "certFingerprintSHA256": "",
-//       "certNotBefore": "",
-//       "certSKI": "",
-//       "certSerial": "",
-//       "certIssuerDN": "",
-//       "certVerified": "NONE",
-//       "certNotAfter": "",
-//       "certSubjectDN": "",
-//       "certPresented": "0",
-//       "certRevoked": "0",
-//       "certIssuerSerial": "",
-//       "certIssuerDNRFC2253": "",
-//       "certFingerprintSHA1": ""
-//     },
-//     "tlsExportedAuthenticator": {
-//       "clientFinished": "c81fe95f9bca118c571267a8ac34fca5e97d687761b826011990887b869a616f",
-//       "clientHandshake": "a4371aac55ca9fecb284202a08fb525a3f0461c1d85d91210efd1a1831a19fe9",
-//       "serverHandshake": "b4544fb4ad5de2da8297dc14afe201c2daacd9e047c06bd0d9b654bf6eb5444d",
-//       "serverFinished": "5c1e40f421d5013d42d7f78bd886110441f80bcd4884cee79bcae93366dda039"
-//     },
-//     "tlsVersion": "TLSv1.2",
-//     "colo": "LHR",
-//     "timezone": "Europe/London",
-//     "region": "England",
-//     "requestPriority": "",
-//     "latitude": "0.60040",
-//     "city": "London",
-//     "regionCode": "ENG",
-//     "postalCode": "LON",
-//     "edgeRequestKeepAliveStatus": 1
-//   },
-//   "fetcher": {},
-//   "redirect": "manual",
-//   "headers": {},
-//   "url": "https://gleam-cloudflare-worker.lpil.workers.dev/",
-//   "method": "GET",
-//   "bodyUsed": false,
-//   "body": null
-// }
-pub external type Request
+pub type Request
 
-pub external type Response
+pub type Response
 
-pub external fn add_fetch_event_listener(
-  fn(Request) -> Promise(Response),
-) -> Nil =
-  "../ffi.js" "add_fetch_event_listener"
+@external(javascript, "../ffi.js", "add_fetch_event_listener")
+pub fn add_fetch_event_listener(
+  listener: fn(Request) -> Promise(Response),
+) -> Nil
 
-pub external fn response(
+@external(javascript, "../ffi.js", "response")
+pub fn response(
   status: Int,
   headers: List(#(String, String)),
   body: String,
-) -> Response =
-  "../ffi.js" "response"
+) -> Response
 
-pub external fn method(Request) -> String =
-  "../ffi.js" "method"
+@external(javascript, "../ffi.js", "method")
+pub fn method(req: Request) -> String
 
-pub external fn url(Request) -> String =
-  "../ffi.js" "url"
+@external(javascript, "../ffi.js", "url")
+pub fn url(req: Request) -> String
 
-pub external fn body(Request) -> String =
-  "../ffi.js" "body"
+@external(javascript, "../ffi.js", "body")
+pub fn body(req: Request) -> String
 
-pub external fn city(Request) -> String =
-  "../ffi.js" "city"
+@external(javascript, "../ffi.js", "city")
+pub fn city(req: Request) -> String
 
-pub external fn country(Request) -> String =
-  "../ffi.js" "country"
+@external(javascript, "../ffi.js", "country")
+pub fn country(req: Request) -> String
 
-pub external fn latitude(Request) -> String =
-  "../ffi.js" "latitude"
+@external(javascript, "../ffi.js", "latitude")
+pub fn latitude(req: Request) -> String
 
-pub external fn longitude(Request) -> String =
-  "../ffi.js" "longitude"
+@external(javascript, "../ffi.js", "longitude")
+pub fn longitude(req: Request) -> String
